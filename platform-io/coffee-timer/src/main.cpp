@@ -52,7 +52,7 @@ void loop() {
     if (timer.running()) {
       timer.cancel();
       setRelay(false);
-      display.show(0);
+      display.show(timer.value());
       Serial.println(F("Countdown cancelled; relay off"));
     } else if (timer.start(millis())) {
       setRelay(true);

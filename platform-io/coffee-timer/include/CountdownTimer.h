@@ -26,6 +26,7 @@ class CountdownTimer {
   unsigned long intervalMs_;
   unsigned long previousTickMs_;
   uint8_t value_;
+  uint8_t savedValue_;
   bool running_;
 };
 

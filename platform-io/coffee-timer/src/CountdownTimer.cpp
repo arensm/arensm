@@ -6,6 +6,7 @@ CountdownTimer::CountdownTimer(uint8_t maximumSeconds,
       intervalMs_(intervalMs),
       previousTickMs_(0),
       value_(0),
+      savedValue_(0),
       running_(false) {}
 
 void CountdownTimer::restore(uint8_t seconds) {
@@ -34,6 +35,7 @@ bool CountdownTimer::start(unsigned long nowMs) {
   if (running_ || value_ == 0) {
     return false;
   }
+  savedValue_ = value_;
   running_ = true;
   previousTickMs_ = nowMs;
   return true;
@@ -41,7 +43,7 @@ bool CountdownTimer::start(unsigned long nowMs) {
 
 void CountdownTimer::cancel() {
   running_ = false;
-  value_ = 0;
+  value_ = savedValue_;
 }
 
 CountdownTimer::TickResult CountdownTimer::update(unsigned long nowMs) {

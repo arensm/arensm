@@ -327,7 +327,7 @@ void CdPlayer::readSubchannel() {
   currentTrack_ = bus_.read(AtapiBus::kData).low;
   const AtapiBus::Word minuteWord = bus_.read(AtapiBus::kData);
   const AtapiBus::Word secondFrameWord = bus_.read(AtapiBus::kData);
-  position_ = {minuteWord.high, secondFrameWord.low, secondFrameWord.high};
+  position_ = {minuteWord.low, minuteWord.high, secondFrameWord.low};
   drainDataPhase();
 }
 

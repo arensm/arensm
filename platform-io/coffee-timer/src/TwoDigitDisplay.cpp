@@ -13,6 +13,7 @@ TwoDigitDisplay::TwoDigitDisplay(uint8_t dataPin, uint8_t clockPin,
     : shiftRegister_(dataPin, clockPin, latchPin) {}
 
 void TwoDigitDisplay::show(uint8_t number) {
+  if (number > 99) number = 99;
   const uint8_t digits[] = {kDigitPatterns[number / 10],
                             kDigitPatterns[number % 10]};
   shiftRegister_.setAll(digits);

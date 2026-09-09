@@ -1,0 +1,11 @@
+.pio/
+.env
+.MIGRATION.md
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+*.orig
+.vscode/
+*.bin
+
