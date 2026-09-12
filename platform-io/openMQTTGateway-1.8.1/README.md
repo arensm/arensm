@@ -1,11 +1,7 @@
-[![Community forum](https://img.shields.io/badge/community-forum-brightgreen.svg)](https://community.openmqttgateway.com)
 
-![Build](https://github.com/1technophile/OpenMQTTGateway/workflows/Build/badge.svg?branch=development)
-![Check Code Format](https://github.com/1technophile/OpenMQTTGateway/workflows/Check%20Code%20Format/badge.svg?branch=development)
+**Stand: 13. September 2026**
 
-[![OpenMQTTGateway capabilities](https://github.com/1technophile/OpenMQTTGateway/blob/development/docs/.vuepress/public/img/OpenMQTTGateway.png)](https://community.openmqttgateway.com)
-
-OpenMQTTGateway aims to unify various technologies and protocols into a single firmware. This reduces the need for multiple physical bridges and streamlines diverse technologies under the widely-used [MQTT](http://mqtt.org/) protocol.
+## Aktuelle Erweiterungen
 
 ## Lokale Anpassungen in `main/main.ino`
 
@@ -98,6 +94,16 @@ lokale Gerätekonfiguration bei Aktualisierungen des OpenMQTTGateway-
 Quellstands. Da die Werte über Build-Flags in die Firmware übernommen werden,
 sind sie trotz der ausgelagerten Dateien Bestandteil der erzeugten Binärdatei
 und müssen weiterhin vertraulich behandelt werden.
+
+
+[![Community forum](https://img.shields.io/badge/community-forum-brightgreen.svg)](https://community.openmqttgateway.com)
+
+![Build](https://github.com/1technophile/OpenMQTTGateway/workflows/Build/badge.svg?branch=development)
+![Check Code Format](https://github.com/1technophile/OpenMQTTGateway/workflows/Check%20Code%20Format/badge.svg?branch=development)
+
+[![OpenMQTTGateway capabilities](https://github.com/1technophile/OpenMQTTGateway/blob/development/docs/.vuepress/public/img/OpenMQTTGateway.png)](https://community.openmqttgateway.com)
+
+OpenMQTTGateway aims to unify various technologies and protocols into a single firmware. This reduces the need for multiple physical bridges and streamlines diverse technologies under the widely-used [MQTT](http://mqtt.org/) protocol.
 
 ## Sponsors
 
