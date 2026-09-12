@@ -7,6 +7,98 @@
 
 OpenMQTTGateway aims to unify various technologies and protocols into a single firmware. This reduces the need for multiple physical bridges and streamlines diverse technologies under the widely-used [MQTT](http://mqtt.org/) protocol.
 
+## Lokale Anpassungen in `main/main.ino`
+
+Gegenueber dem offiziellen Stand von OpenMQTTGateway 1.8.1 wurde der WLAN-
+Start in `setupWiFiFromBuild()` fuer die manuelle WLAN-Konfiguration erweitert:
+
+```cpp
+WiFi.persistent(false); // hinzugefuegt
+WiFi.mode(WIFI_STA);    // bereits im Original vorhanden
+WiFi.disconnect();      // hinzugefuegt
+delay(250);             // hinzugefuegt
+```
+
+- `WiFi.persistent(false)` verhindert, dass WLAN-Zugangsdaten und Aenderungen
+  der WLAN-Konfiguration dauerhaft in den Flash beziehungsweise NVS geschrieben
+  werden. Dadurch bestimmen weiterhin die beim Build hinterlegten Zugangsdaten
+  die Verbindung und unnoetige Schreibzugriffe auf den Flash werden vermieden.
+- `WiFi.disconnect()` beendet eine eventuell noch aktive oder vom vorherigen
+  Start uebernommene Verbindung. `WiFiMulti` beginnt damit aus einem definierten
+  Zustand und verbindet sich gezielt mit den in der Firmware hinterlegten Netzen.
+- `delay(250)` gibt dem asynchron arbeitenden WLAN-Stack Zeit, den Wechsel in den
+  Station-Modus und das Trennen vollstaendig abzuschliessen, bevor die
+  Zugangspunkte registriert und der neue Verbindungsversuch gestartet werden.
+
+`WiFi.mode(WIFI_STA)` gehoert bereits zum Originalcode und ist oben nur
+aufgefuehrt, um die vollstaendige Startreihenfolge nachvollziehbar zu machen.
+Die Anpassung wird ausschließlich kompiliert, wenn `ESPWifiManualSetup`
+aktiviert ist. Ziel ist ein reproduzierbarer und zuverlaessiger WLAN-Start ohne
+Einfluss zuvor gespeicherter Verbindungsdaten.
+
+## Lokale Build-Konfiguration mit `.env` und `prod_env.ini`
+
+Zugangsdaten und andere installationsbezogene Werte liegen nicht im
+Quellcode. Sie werden lokal in der von Git ignorierten Datei `.env` als
+Umgebungsvariablen gepflegt:
+
+```bash
+export OMG_WIFI_SSID="..."
+export OMG_WIFI_PASSWORD="..."
+export OMG_MQTT_SERVER="..."
+export OMG_MQTT_PORT="1883"
+export OMG_MQTT_USER="..."
+export OMG_MQTT_PASS="..."
+export OMG_GATEWAY_PASS="..."
+export OMG_OTA_PASSWORD="..."
+```
+
+Vor jedem PlatformIO-Aufruf müssen diese Werte in die aktuelle Shell geladen
+werden:
+
+```bash
+source .env
+```
+
+Die ebenfalls von Git ignorierte `prod_env.ini` enthält das lokale
+Hardware-, Build- und Upload-Profil. PlatformIO liest sie über den Eintrag
+`*_env.ini` in `extra_configs` automatisch ein. Das Standardziel ist
+`nodemcuv2-rf-cc1101-d2`; es erweitert das vorhandene
+`nodemcuv2-rf-cc1101`-Profil:
+
+- `RF_RECEIVER_GPIO=4` legt den Datenausgang des CC1101-Empfängers auf D2
+  beziehungsweise GPIO 4 des NodeMCU.
+- `ESPWifiManualSetup=true` aktiviert die manuelle WLAN-Konfiguration und
+  damit auch die oben beschriebene Anpassung in `setupWiFiFromBuild()`.
+- WLAN-, MQTT-, Gateway- und OTA-Zugangsdaten werden mit
+  `${sysenv.OMG_...}` aus der zuvor geladenen `.env` übernommen.
+- Gateway-Name und OTA-Hostname sind fest auf `RF2MQTT` gesetzt, damit das
+  Gerät im Netzwerk und in MQTT eindeutig wiedererkennbar ist.
+- Der serielle Upload verwendet `/dev/cu.usbserial-0001` mit 115200 Baud.
+
+Für spätere Aktualisierungen existiert zusätzlich das Ziel
+`nodemcuv2-rf-cc1101-d2-ota`. Es erbt sämtliche Build-Einstellungen des
+seriellen Profils und verwendet `espota` auf Port 8266. Das OTA-Passwort
+kommt aus `OMG_OTA_PASSWORD`; die Zieladresse ist in `prod_env.ini`
+hinterlegt.
+
+```bash
+# Standardziel bauen
+pio run
+
+# Erstinstallation oder Wiederherstellung über USB
+pio run -t upload
+
+# Aktualisierung über WLAN
+pio run -e nodemcuv2-rf-cc1101-d2-ota -t upload
+```
+
+Diese Trennung hält private Werte aus dem Repository heraus und bewahrt die
+lokale Gerätekonfiguration bei Aktualisierungen des OpenMQTTGateway-
+Quellstands. Da die Werte über Build-Flags in die Firmware übernommen werden,
+sind sie trotz der ausgelagerten Dateien Bestandteil der erzeugten Binärdatei
+und müssen weiterhin vertraulich behandelt werden.
+
 ## Sponsors
 
 <a href = "https://www.emqx.com/en?utm_source=github.com&utm_medium=referral&utm_campaign=OpenMQTTGateway-github-to-emqx-home"><img src="https://github.com/1technophile/OpenMQTTGateway/blob/development/docs/img/EMQ.png"  height="50"/></a>

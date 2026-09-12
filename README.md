@@ -1,5 +1,19 @@
 # arensm projects
 
+**Stand: 13. September 2026**
+
+## Aktuelle Erweiterungen
+
+- `esp32-yoRadio`: Als PlatformIO-Projekt fuer das ESP32-CYD integriert, mit
+  Touch-Bedienung, Audioausgabe ueber den internen DAC, Weboberflaeche,
+  Captive Portal und aktualisiertem AsyncTCP-Netzwerkunterbau.
+- `openMQTTGateway-1.8.1`: Vollstaendiges PlatformIO-Projekt ergaenzt,
+  einschließlich ESP32-/CC1101-Konfigurationen fuer Pilight und Somfy.
+- `atapiduino`: Auswertung der Minute-/Sekunde-/Frame-Daten des ATAPI-
+  Subchannels korrigiert.
+- `coffee-timer`: Zweistellige Anzeige auf 99 begrenzt und beim Abbruch des
+  Countdowns den zuvor ausgewaehlten Wert wiederhergestellt.
+
 Dieses Verzeichnis ist der gemeinsame Einstiegspunkt fuer die Projekte von
 `arensm`. Projekte werden nach ihrem primaeren Build- und Laufzeittyp
 einsortiert.
