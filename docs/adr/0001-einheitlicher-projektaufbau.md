@@ -185,19 +185,18 @@ fuer Arduino-Uno-Firmware mit Anzeige, Drehencoder, EEPROM und Relais.
 Die Uhrensammlung beginnt mit `Arduino/Projekte/WordClock_Ari_V5`. Der Neubau
 liegt ohne Versionssuffix unter `platform-io/uhrensoehne/wordclock_ari`.
 
-Die bestehende `Spritpreis-Uhr-CYD` wird als
-`platform-io/uhrensoehne/spritpreis-uhr-cyd` aufgenommen. Mehrere notwendige
+Die bestehende `Spritpreis-Uhr-CYD` ist keine Uhr aus der Sammlung
+`uhrensoehne`, sondern ein eigenstaendiges Informationsdisplay. Sie wird daher
+analog zu `atapiduino` als eigenes PlatformIO-Projekt unter
+`platform-io/spritpreis-uhr-cyd` aufgenommen. Mehrere notwendige
 Displaycontroller bleiben als getrennte PlatformIO-Umgebungen im selben
 Projekt erhalten.
 
 Für die Uhrensammlung wird anschließend das lokale Referenzprojekt
 `esp8266-clock` als verbindlicher technischer Standard übernommen.
-`platform-io/uhrensoehne` ist selbst das
-gemeinsame PlatformIO-Projekt; ein zusätzlicher Projekt-Unterordner wird nicht
-verwendet. Alle Uhrenvarianten werden über eigene, kleingeschriebene Umgebungen
-gebaut. Alle Varianten starten über die gemeinsame `src/main.cpp` und
-implementieren die in `src/clock_hooks.h` definierte `user_*`-Schnittstelle.
-Die Spritpreis-Uhr liegt als `src/cl_spritpreis_cyd.cpp` direkt neben den
-anderen Dateien `cl_*.cpp`, verwaltet ihre spezialisierten Dienste selbst und
-besitzt ILI9341- und ST7789-Umgebungen. Ihr eigenständiger vorheriger Neubau
-bleibt als Vergleichsstand erhalten.
+`platform-io/uhrensoehne` ist selbst das gemeinsame PlatformIO-Projekt; ein
+zusätzlicher Projekt-Unterordner wird nicht verwendet. Alle Uhrenvarianten
+werden über eigene, kleingeschriebene Umgebungen gebaut. Alle Varianten starten
+über die gemeinsame `src/main.cpp` und implementieren die in
+`src/clock_hooks.h` definierte `user_*`-Schnittstelle. Eigenstaendige Projekte
+wie `spritpreis-uhr-cyd` werden nicht in diese gemeinsame Firmware integriert.

@@ -4,6 +4,11 @@
 
 ## Aktuelle Erweiterungen
 
+- `spritpreis-uhr-cyd`: Eigenstaendiges PlatformIO-Projekt fuer das
+  ESP32-CYD-Informationsdisplay, mit getrennten Umgebungen fuer ILI9341- und
+  ST7789-Displays.
+- `uhrensoehne`: Gemeinsame PlatformIO-Uhrensammlung nach dem Referenzaufbau
+  von `esp8266-clock`.
 - `esp32-yoRadio`: Als PlatformIO-Projekt fuer das ESP32-CYD integriert, mit
   Touch-Bedienung, Audioausgabe ueber den internen DAC, Weboberflaeche,
   Captive Portal und aktualisiertem AsyncTCP-Netzwerkunterbau.
@@ -23,6 +28,7 @@ einsortiert.
 | Verzeichnis | Inhalt |
 | --- | --- |
 | `platform-io/` | Mikrocontroller-Firmware, die mit PlatformIO gebaut wird |
+| `platform-io/uhrensoehne/` | Gemeinsames PlatformIO-Projekt fuer alle Uhr-Firmwarevarianten |
 | `bash/` | Eigenstaendige Bash-Skripte und Bash-Projekte |
 | `docs/adr/` | Uebergreifende Architecture Decision Records (ADRs) |
 
@@ -38,5 +44,5 @@ beschrieben.
 - Der neue Stand muss eigenstaendig baubar und dokumentiert sein.
 - Zugangsdaten und lokale Build-Artefakte gehoeren nicht ins Repository.
 - Alle Ordnernamen werden kleingeschrieben.
-- Jedes Projekt enthaelt eine zweisprachige `.env.example`; private Werte
+- Jedes Projekt enthaelt eine zweisprachige `env.example`; private Werte
   stehen ausschließlich in der ignorierten `.env`.
