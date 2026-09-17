@@ -185,14 +185,6 @@ irw
 
 ![audioBox Gesamtverkabelung](audiobox-wiring.png)
 
-Das Schaltbild liegt in diesem Verzeichnis zusätzlich als skalierbare
-SVG-Datei vor:
-
-```text
-audiobox-wiring.png
-audiobox-wiring.svg
-```
-
 Wichtige Anschlüsse:
 
 - IR-Empfänger: 3,3 V an Pin 1, Signal an BCM4/Pin 7, Masse an Pin 9
