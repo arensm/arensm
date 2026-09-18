@@ -356,4 +356,4 @@ overlay|wifimac|overlays/wifimac.dtbo|c84710247e6ead701ba0eec4e8fb2ada4c6ab4acb0
 overlay|wittypi|overlays/wittypi.dtbo|6db58b2093cee11014b347de9b4a51688aca3b2a3bd84b5959d68a340dec88a2|1056|wittypi
 overlay|wm8960-soundcard|overlays/wm8960-soundcard.dtbo|6abddc36f8d2841862eedf45d84fd52659ed1d69453be83bc572fd2e2181a260|2368|wm8960-soundcard
 overlay|ws2812-pio|overlays/ws2812-pio.dtbo|258f2ad0aa5bde8b85e73364163a7b6c5448f9c4d455d7883f510291f5210754|1361|ws2812-pio
-wifi|rtl8188fu|wifi/rtl8188fu-6.12.61-v7.tar.xz|289a7f695fde31f749aa1d9aa1042b019c8f865d6b87e0ce84ca29c35e2411a6|72772|Realtek RTL8188FU USB 0bda:f179 (6.12.61-v7)
+wifi|rtl8188fu|wifi/rtl8188fu-6.12.61-v7.tar.xz|aab93b032483b59391495055711e804398342ef5549d883ee178a3dc023ca552|80576|Realtek RTL8188EU/FU USB 0bda:8179/f179 (6.12.61-v7)
