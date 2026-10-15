@@ -1,8 +1,6 @@
 # Retro TV V20
 
-Kleines Retro-Monitorgehäuse für ein 4,2-Zoll-E-Paper-Display auf einem Desktop-Sockel. V20 enthält jedes Druckteil als eigene OpenSCAD-Datei, STL und PNG-Vorschau.
-
-Die Gehäuseteile basieren auf **V11**, das korrigierte Drehgelenk auf **V13**. Der obere Drehteller ist an die Monitorauflage angepasst; der Anschlag sitzt hinten auf einem kleineren Radius. Die beiden Gelenkteile gemeinsam verwenden.
+Kleines Retro-Monitorgehäuse für ein 4,2-Zoll-E-Paper-Display auf einem Desktop-Sockel. V20 enthält jedes Druckteil als eigene STL und PNG-Vorschau.
 
 ## Vorschau
 
@@ -12,53 +10,17 @@ Die Gehäuseteile basieren auf **V11**, das korrigierte Drehgelenk auf **V13**. 
 
 ## Dateien
 
-| Bauteil | OpenSCAD | Druckdatei | Vorschau |
+| Bauteil | Druckdatei | Vorschau |
 | --- | --- | --- | --- |
-| Monitorblende | [front.scad](front.scad) | [front.stl](front.stl) | [PNG](front.png) |
-| Monitor-Rückgehäuse mit geschlossenen Kabeltaschen | [rueckgehaeuse.scad](rueckgehaeuse.scad) | [rueckgehaeuse.stl](rueckgehaeuse.stl) | [PNG](rueckgehaeuse.png) |
-| Display-Haltering | [displayhalter.scad](displayhalter.scad) | [displayhalter.stl](displayhalter.stl) | [PNG](displayhalter.png) |
-| Unterer Standfuß | [stand_unterteil.scad](stand_unterteil.scad) | [stand_unterteil.stl](stand_unterteil.stl) | [PNG](stand_unterteil.png) |
-| Oberer Monitor-Drehteller | [monitor_drehteller.scad](monitor_drehteller.scad) | [monitor_drehteller.stl](monitor_drehteller.stl) | [PNG](monitor_drehteller.png) |
-| Computer-Frontblende | [sockelfront.scad](sockelfront.scad) | [sockelfront.stl](sockelfront.stl) | [PNG](sockelfront.png) |
-| Computer-Oberschale | [sockeldeckel.scad](sockeldeckel.scad) | [sockeldeckel.stl](sockeldeckel.stl) | [PNG](sockeldeckel.png) |
-| Computer-Unterschale | [bodenplatte.scad](bodenplatte.scad) | [bodenplatte.stl](bodenplatte.stl) | [PNG](bodenplatte.png) |
-| Gewindeeinsatz-Passprobe | [SCAD](Gewindeeinsatz_Passprobe.scad) | [STL](Gewindeeinsatz_Passprobe.stl) | [PNG](Gewindeeinsatz_Passprobe.png) |
-
-Zusätzlich enthalten:
-
-- [Baugruppe.scad](Baugruppe.scad): zusammengesetztes Gehäuse ohne Display-Elektronik.
-- [Explosionszeichnung.scad](Explosionszeichnung.scad): räumlich getrennte Darstellung der acht Hauptteile.
-- `Geometrie/`: benötigte, aus STEP abgeleitete Grundkonturen.
-- [Pruefbericht.txt](Pruefbericht.txt): Ergebnisse der Geometrieprüfung.
-
-Die bereits im Ordner vorhandenen Dateien mit `V13` beziehungsweise `v13` im Namen und `Vorschau.png` wurden erhalten. Für V20 die oben verlinkten Bauteildateien verwenden.
-
-## In OpenSCAD bearbeiten
-
-1. Das vollständige Paket entpacken. **Den Unterordner `Geometrie` neben den SCAD-Dateien behalten.**
-2. Die gewünschte Bauteil-SCAD öffnen. Sie zeigt genau ein Teil in Drucklage.
-3. Die Parameter am Dateianfang ändern. Alle Längen sind in Millimetern angegeben.
-4. Mit **F5** die Vorschau prüfen und mit **F6** rendern.
-5. Über **Datei → Exportieren → Als STL exportieren** eine neue Druckdatei erstellen.
-
-Baugruppe und Explosionszeichnung verwenden die einzelnen SCAD-Dateien. Änderungen an diesen Quellen werden dort beim erneuten Laden beziehungsweise Berechnen übernommen. Vorhandene STL- und PNG-Dateien aktualisieren sich nicht automatisch.
-
-Die importierten Gehäusekonturen sind fest. Das Ändern einzelner Parameter skaliert diese Konturen nicht automatisch. Frei einstellbar bleiben die in der jeweiligen Datei vorhandenen Einbauten und Ausschnitte. Aufeinander abgestimmte Maße des Drehgelenks müssen in beiden Dateien zusammen geändert werden.
-
-### Wichtige Parameter
-
-| Datei | Parameter | Bedeutung |
-| --- | --- | --- |
-| `bodenplatte.scad` | `halter_abstand_x`, `halter_abstand_y` | Lochraster der vier Elektronikhalter |
-| `bodenplatte.scad` | `halter_versatz_x`, `halter_versatz_y` | Gemeinsame Position der Halter |
-| `bodenplatte.scad` | `halter_1_korrektur` bis `halter_4_korrektur` | Individuelle Korrektur: `[X, Y, Höhe, Außendurchmesser]` |
-| `bodenplatte.scad` | `halter_hoehe`, `halter_durchmesser` | Grundabmessungen der Elektronikhalter |
-| `bodenplatte.scad` | `einsatz_bohrung`, `einsatz_tiefe` | Aufnahme für die Gewindeeinsätze der Elektronikhalter |
-| `bodenplatte.scad` | `usb_breite`, `usb_hoehe`, `usb_radius`, `usb_mitte_x`, `usb_mitte_z` | USB-Ausschnitt in der Rückwand |
-| `sockeldeckel.scad` | `gehaeuse_einsatz_d`, `gehaeuse_einsatz_tiefe` | Aufnahmen für die Gehäuseverschraubung |
-| `rueckgehaeuse.scad` | `stecker_hoehe`, `stecker_mitte_y`, `stecker_aussen_x` | Größe und Lage der seitlichen Kabeltaschen |
-
-Der USB-Ausschnitt ist ein einstellbarer Wandausschnitt; seine Standardmaße sind keine Zusage für eine bestimmte USB-C-Buchse. Das Elektronik-Lochraster ist ebenfalls an die tatsächlich verwendete Platine anzupassen.
+| Monitorblende | [front.stl](front.stl) | [PNG](front.png) |
+| Monitor-Rückgehäuse mit geschlossenen Kabeltaschen | [rueckgehaeuse.stl](rueckgehaeuse.stl) | [PNG](rueckgehaeuse.png) |
+| Display-Haltering | [displayhalter.stl](displayhalter.stl) | [PNG](displayhalter.png) |
+| Unterer Standfuß | [stand_unterteil.stl](stand_unterteil.stl) | [PNG](stand_unterteil.png) |
+| Oberer Monitor-Drehteller | [monitor_drehteller.stl](monitor_drehteller.stl) | [PNG](monitor_drehteller.png) |
+| Computer-Frontblende | [sockelfront.stl](sockelfront.stl) | [PNG](sockelfront.png) |
+| Computer-Oberschale | [sockeldeckel.stl](sockeldeckel.stl) | [PNG](sockeldeckel.png) |
+| Computer-Unterschale | [bodenplatte.stl](bodenplatte.stl) | [PNG](bodenplatte.png) |
+| Gewindeeinsatz-Passprobe | [STL](Gewindeeinsatz_Passprobe.stl) | [PNG](Gewindeeinsatz_Passprobe.png) |
 
 ## Display und Befestigung
 
@@ -88,12 +50,3 @@ Die zentrale Gelenkachse verwendet **M4**. Zwei Befestigungen verbinden den ober
 7. Elektronik auf den Bodenhaltern befestigen, Computer-Frontblende einsetzen und die beiden Schalen mit den vier Schrauben von unten verbinden.
 
 Schraubenlängen und Klemmung anhand der tatsächlich verwendeten Schraubenköpfe, Unterlegscheiben und Einsätze kontrollieren. Die Explosionszeichnung zeigt die Zuordnung der Teile; sie enthält keine Schrauben oder Elektronik.
-
-## Prüfung und Grenzen
-
-- Alle neun Druck-STLs einschließlich Passprobe sind geschlossen, haben konsistente Normalen und liegen mit ihrer Unterseite auf Z = 0.
-- Abmessungen und Volumen wurden gegen die bisherigen Referenzen geprüft.
-- Acht STL-Dateien wurden neu aus SCAD exportiert. Das Rückgehäuse-STL wurde neu aus der passenden V11-STEP-Geometrie erzeugt; seine separate SCAD wurde als CSG und PNG geprüft. Der vollständige OpenSCAD-STL-Export dieses Teils wurde wegen der langen Rechenzeit abgebrochen.
-- Das V13-Gelenk wurde geometrisch bei 0° und ±30° auf freie Bewegung geprüft. Bei ±34° blockieren die Endanschläge; das genaue Kontaktmaß innerhalb dieses Bereichs wurde nicht bestimmt.
-- Eine reale Druck-, Stecker- und Montagepassprobe des vollständigen V20-Pakets steht aus.
-- Vorherige Versionsdateien wurden bei der Erstellung von V20 nicht verändert.
