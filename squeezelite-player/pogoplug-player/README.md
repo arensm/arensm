@@ -25,7 +25,7 @@ unzip 2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip '2026.11.08-pogo-e02-v3.2-ext2
 The extracted image is exactly **100,000,000 bytes**. Its SHA256 is:
 
 ```text
-e0f06dd2851a723210d69af201b5cff247bce466e226d99206ffd3d8ff4e0f21
+badf15ea1be5a5c1d292e3ee7806ef90a30f3a48d4c56bc838d2edb849e857bb
 ```
 
 Check it on Linux:
@@ -170,7 +170,7 @@ unzip 2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip '2026.11.08-pogo-e02-v3.2-ext2
 Das entpackte Image ist exakt **100.000.000 Byte** groß. Seine SHA256-Prüfsumme lautet:
 
 ```text
-e0f06dd2851a723210d69af201b5cff247bce466e226d99206ffd3d8ff4e0f21
+badf15ea1be5a5c1d292e3ee7806ef90a30f3a48d4c56bc838d2edb849e857bb
 ```
 
 Unter Linux prüfen:
