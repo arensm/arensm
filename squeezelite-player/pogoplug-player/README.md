@@ -1,10 +1,27 @@
-# PogoPlug E02 Player — V3.2
+# PogoPlug E02 Player — V3.3
 
 [English](#english) · [Deutsch](#deutsch)
 
 ## English
 
-Installation and first setup for **[2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip](./2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip)**.
+Installation and first setup for **[2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip](./2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip)**.
+
+### New in V3.3
+
+V3.3 extends the **cog / Setup** menu. Its image is named `2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip`; the installation instructions below refer to this V3.3 image.
+
+| Feature | Function |
+|---|---|
+| **LMS server** | Enter a hostname or IP address, optionally with a port. Leave empty for automatic discovery. Saved as `LMS_SERVER` in `/boot/squeezelite.conf`. |
+| **Audio device selection** | Choose an output from `squeezelite -l`. The list reloads when Setup opens and includes device names and descriptions. `default` remains available and is the initial setting. Saved as `AUDIO_DEVICE` in `/boot/squeezelite.conf`. |
+| **Public SSH keys** | View and edit `/root/.ssh/authorized_keys`. The field replaces the file when saved. Enter one public RSA, Ed25519 or ECDSA key per line, without options; keep your own access key. At least one valid key must remain. Never enter private keys. |
+| **Reboot / Power off** | Restart or shut down the PogoPlug after confirmation. To start it again after poweroff, disconnect and reconnect power. |
+
+Press **Save** to apply settings. Changing the LMS server or audio device briefly restarts a running Squeezelite; the other audio options in the configuration file are retained. SSH directory/file permissions are maintained as `700` / `600`.
+
+All new labels are available in **English and German**. Hostname/player naming, the U-Boot version display, LED behavior and the rule that every reboot starts Squeezelite are retained. The image carries the same authorized public keys as V3.2 until you edit them.
+
+The web interface has no login. Anyone who can reach it over the network can change these settings, including SSH access; use it within a trusted local network.
 
 ### Requirements
 
@@ -19,25 +36,25 @@ Installation and first setup for **[2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip]
 Download the ZIP file and open a terminal in its download directory. Extract only the disk image:
 
 ```sh
-unzip 2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip '2026.11.08-pogo-e02-v3.2-ext2-100MB.img'
+unzip 2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip 'pogo-e02-v3.3-ext2-100MB.img'
 ```
 
 The extracted image is exactly **100,000,000 bytes**. Its SHA256 is:
 
 ```text
-badf15ea1be5a5c1d292e3ee7806ef90a30f3a48d4c56bc838d2edb849e857bb
+7e6db69124e1046f0ba0aae1fa734bc11822d04a5609343dce309c42d4bbd11c
 ```
 
 Check it on Linux:
 
 ```sh
-sha256sum 2026.11.08-pogo-e02-v3.2-ext2-100MB.img
+sha256sum pogo-e02-v3.3-ext2-100MB.img
 ```
 
 Or on macOS:
 
 ```sh
-shasum -a 256 2026.11.08-pogo-e02-v3.2-ext2-100MB.img
+shasum -a 256 pogo-e02-v3.3-ext2-100MB.img
 ```
 
 ### 2. Write the USB stick
@@ -61,7 +78,7 @@ sudo umount /dev/sdX1
 Then write the image:
 
 ```sh
-sudo dd if=2026.11.08-pogo-e02-v3.2-ext2-100MB.img of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=pogo-e02-v3.3-ext2-100MB.img of=/dev/sdX bs=4M status=progress conv=fsync
 sync
 ```
 
@@ -79,7 +96,7 @@ Replace `N` with the correct disk number in all commands below:
 
 ```sh
 diskutil unmountDisk /dev/diskN
-sudo dd if=2026.11.08-pogo-e02-v3.2-ext2-100MB.img of=/dev/rdiskN bs=4m
+sudo dd if=pogo-e02-v3.3-ext2-100MB.img of=/dev/rdiskN bs=4m
 sync
 diskutil eject /dev/diskN
 ```
@@ -114,11 +131,11 @@ This image is configured with:
 |---|---|
 | LMS server | `lms.lan` |
 | Squeezelite audio device | `default` |
-| AirPlay audio device | `hw:CARD=Set,DEV=0` |
+| AirPlay audio device | `default` |
 
 Make sure `lms.lan` resolves to your LMS, or change `LMS_SERVER` in `/boot/squeezelite.conf`.
 
-Squeezelite uses `AUDIO_DEVICE="default"` in `/boot/squeezelite.conf`; keep this setting for the default audio output. AirPlay has its own device setting: if needed, inspect `aplay -l` and adjust `output_device` in `/etc/shairport-sync.conf`, for example to `hw:0,0` for card 0, device 0. Reboot after changing the configuration.
+Squeezelite uses `AUDIO_DEVICE="default"` in `/boot/squeezelite.conf`; keep this setting for the default audio output. AirPlay also uses `output_device = "default";` in `/etc/shairport-sync.conf`. The web audio-device selector changes Squeezelite only. If a separate AirPlay output is required, configure it in that file and restart AirPlay.
 
 For console setup, use a **3.3 V TTL serial adapter**, **115200 baud, 8N1, no flow control**. Log in as `root`; the initial console password is empty. The IP address can also be checked there:
 
@@ -149,7 +166,24 @@ poweroff
 
 ## Deutsch
 
-Installation und erste Einrichtung für **[2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip](./2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip)**.
+Installation und erste Einrichtung für **[2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip](./2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip)**.
+
+### Neu in V3.3
+
+V3.3 erweitert das Menü **Zahnrad / Einstellungen**. Das Image heißt `2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip`; die nachfolgende Installationsanleitung bezieht sich auf dieses V3.3-Image.
+
+| Funktion | Beschreibung |
+|---|---|
+| **LMS-Server** | Hostname oder IP-Adresse eintragen, optional mit Port. Ein leerer Eintrag aktiviert die automatische Suche. Speicherung als `LMS_SERVER` in `/boot/squeezelite.conf`. |
+| **Audio-Geräteauswahl** | Ausgabe aus `squeezelite -l` auswählen. Beim Öffnen der Einstellungen wird die Liste mit Gerätenamen und Beschreibungen neu eingelesen. `default` bleibt verfügbar und ist voreingestellt. Speicherung als `AUDIO_DEVICE` in `/boot/squeezelite.conf`. |
+| **Öffentliche SSH-Schlüssel** | `/root/.ssh/authorized_keys` anzeigen und bearbeiten. Das Feld ersetzt beim Speichern den Dateiinhalt. Ein öffentlicher RSA-, Ed25519- oder ECDSA-Schlüssel pro Zeile, ohne Optionen; den eigenen Zugangsschlüssel beibehalten. Mindestens ein gültiger Schlüssel muss verbleiben. Keine privaten Schlüssel eingeben. |
+| **Neu starten / Ausschalten** | Den PogoPlug nach einer Bestätigung neu starten oder herunterfahren. Nach dem Ausschalten zum Einschalten die Stromversorgung kurz trennen und wieder verbinden. |
+
+Mit **Speichern** werden die Einstellungen übernommen. Änderungen am LMS-Server oder Audio-Gerät starten einen laufenden Squeezelite kurz neu; die übrigen Audio-Optionen in der Konfigurationsdatei bleiben erhalten. Die Rechte für SSH-Verzeichnis und Schlüsseldatei werden auf `700` / `600` gehalten.
+
+Alle neuen Beschriftungen sind auf **Deutsch und Englisch** vorhanden. Hostname und Playernamen, U-Boot-Versionsanzeige, LED-Verhalten und der automatische Start von Squeezelite nach jedem Neustart bleiben erhalten. Das Image enthält bis zur eigenen Bearbeitung dieselben autorisierten öffentlichen Schlüssel wie V3.2.
+
+Die Weboberfläche hat keine Anmeldung. Wer sie im Netzwerk erreichen kann, kann diese Einstellungen einschließlich der SSH-Zugänge ändern; sie ist für ein vertrauenswürdiges lokales Netzwerk vorgesehen.
 
 ### Voraussetzungen
 
@@ -164,25 +198,25 @@ Installation und erste Einrichtung für **[2026.11.08-pogo-e02-v3.2-ext2-100MB.i
 Die ZIP-Datei herunterladen und im Downloadverzeichnis ein Terminal öffnen. Nur das Laufwerksimage entpacken:
 
 ```sh
-unzip 2026.11.08-pogo-e02-v3.2-ext2-100MB.img.zip '2026.11.08-pogo-e02-v3.2-ext2-100MB.img'
+unzip 2026.11.09-pogo-e02-v3.3-ext2-100MB.img.zip 'pogo-e02-v3.3-ext2-100MB.img'
 ```
 
 Das entpackte Image ist exakt **100.000.000 Byte** groß. Seine SHA256-Prüfsumme lautet:
 
 ```text
-badf15ea1be5a5c1d292e3ee7806ef90a30f3a48d4c56bc838d2edb849e857bb
+7e6db69124e1046f0ba0aae1fa734bc11822d04a5609343dce309c42d4bbd11c
 ```
 
 Unter Linux prüfen:
 
 ```sh
-sha256sum 2026.11.08-pogo-e02-v3.2-ext2-100MB.img
+sha256sum pogo-e02-v3.3-ext2-100MB.img
 ```
 
 Oder unter macOS:
 
 ```sh
-shasum -a 256 2026.11.08-pogo-e02-v3.2-ext2-100MB.img
+shasum -a 256 pogo-e02-v3.3-ext2-100MB.img
 ```
 
 ### 2. USB-Stick schreiben
@@ -206,7 +240,7 @@ sudo umount /dev/sdX1
 Danach das Image schreiben:
 
 ```sh
-sudo dd if=2026.11.08-pogo-e02-v3.2-ext2-100MB.img of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=pogo-e02-v3.3-ext2-100MB.img of=/dev/sdX bs=4M status=progress conv=fsync
 sync
 ```
 
@@ -224,7 +258,7 @@ diskutil list
 
 ```sh
 diskutil unmountDisk /dev/diskN
-sudo dd if=2026.11.08-pogo-e02-v3.2-ext2-100MB.img of=/dev/rdiskN bs=4m
+sudo dd if=pogo-e02-v3.3-ext2-100MB.img of=/dev/rdiskN bs=4m
 sync
 diskutil eject /dev/diskN
 ```
@@ -259,11 +293,11 @@ Dieses Image verwendet folgende Vorgaben:
 |---|---|
 | LMS-Server | `lms.lan` |
 | Squeezelite-Audiogerät | `default` |
-| AirPlay-Audiogerät | `hw:CARD=Set,DEV=0` |
+| AirPlay-Audiogerät | `default` |
 
 `lms.lan` muss auf den eigenen LMS zeigen. Alternativ `LMS_SERVER` in `/boot/squeezelite.conf` anpassen.
 
-Squeezelite verwendet `AUDIO_DEVICE="default"` in `/boot/squeezelite.conf`; diese Einstellung für die Standard-Audioausgabe beibehalten. AirPlay hat eine eigene Gerätevorgabe: Bei Bedarf mit `aplay -l` nachsehen und `output_device` in `/etc/shairport-sync.conf` anpassen, beispielsweise auf `hw:0,0` für Karte 0, Gerät 0. Nach Konfigurationsänderungen neu starten.
+Squeezelite verwendet `AUDIO_DEVICE="default"` in `/boot/squeezelite.conf`; diese Einstellung für die Standard-Audioausgabe beibehalten. AirPlay verwendet ebenfalls `output_device = "default";` in `/etc/shairport-sync.conf`. Die Audio-Geräteauswahl im Webinterface ändert nur Squeezelite. Eine abweichende AirPlay-Ausgabe bei Bedarf in dieser Datei eintragen und AirPlay neu starten.
 
 Für die Einrichtung an der Konsole einen **3,3-V-TTL-Serielladapter** mit **115200 Baud, 8N1, ohne Flusskontrolle** verwenden. Anmeldung als `root`; das anfängliche Konsolenpasswort ist leer. Die IP-Adresse lässt sich dort ebenfalls anzeigen:
 
