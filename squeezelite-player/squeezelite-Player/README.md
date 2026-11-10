@@ -1,4 +1,4 @@
-# audioBox für Raspberry Pi 2
+# audioBox für Raspberry Pi 2.
 
 Dieses Verzeichnis beschreibt das fertige **audioBox-Image**. Die audioBox ist
 ein kompakter Netzwerk-Musikplayer für einen Raspberry Pi 2. Sie verbindet
