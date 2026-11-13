@@ -1,0 +1,38 @@
+Build und Prüfung auf root@vdr, 2026-11-13
+
+Image: vdr-server-custom:2026-11-13
+ID: sha256:c0cf603cc7f23b133fd7467a4326154d2429d4117febcad56078fb9289549978
+
+PASS: Docker-Build auf x86_64, Quellen-Prüfsumme korrekt.
+PASS: Alle sechs gewünschten Pluginpakete sind im Image installiert.
+PASS: VDR --version erkennt alle sechs Plugins einschließlich svdrposd.
+PASS: ldd für svdrposd zeigt keine fehlenden Bibliotheken.
+PASS: Offline-Initialisierung mit Docker --network none, rund 5 bis 6 Sekunden
+      vom Startbanner bis zum ersten VDR-Aufruf (frische Testkonfiguration).
+PASS: Alle sechs gewünschten Plugins durch Startskript aktiviert.
+PASS: Testaufnahme behält UID/GID 0:0, Modus 600, Größe und Änderungszeit.
+      Zusätzlich Initialisierung mit schreibgeschütztem Aufnahme-Mount geprüft.
+PASS: Nicht eingebautes Plugin wird mit Fehler abgewiesen, nicht installiert.
+PASS: Compose-Override zusammen mit produktiver Compose-Datei validiert.
+
+Grenzen: Der Test hatte keine DVB-Geräte, keine produktiven Mounts und kein
+Netzwerk. VDR endet erwartungsgemäß wegen fehlendem primären Gerät. Empfang,
+Streaming und produktive Startzeit sind noch nicht geprüft. Das Image wurde
+nicht auf den produktiven VDR umgeschaltet. Die bisherige Instanz lief weiter.
+
+Pakete:
+vdr 2.8.2-1
+vdr-dvbapi 1:2.2.6-11
+vdr-svdrposd 1.0.0-33
+vdr-epgsearch 1:2.4.6-3
+vdr-live 1:3.5.6-1
+vdr-streamdev-server 0.6.5-3
+vdr-vnsiserver 2:1.8.4-3
+
+Nachtrag: Produktiv umgestellt nach Zustimmung des Nutzers.
+VDR-Aufruf etwa 10 Sekunden nach Containerstart, Healthcheck erfolgreich.
+Live HTTP 307, Streamdev HTTP 200, VNSI/SVDRP TCP erreichbar.
+Zwei DVB-Geräte initialisiert, alle sechs Plugins aktiviert.
+Keine Containerneustarts bei der Abschlussprüfung.
+Kein unabhängiger Bild-/Ton- oder Aufnahmetest.
+Original-Compose nach gesonderter Zustimmung gesichert und Image dauerhaft geändert.

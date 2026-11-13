@@ -1,0 +1,8 @@
+# Run with your existing compose file, from its directory:
+# docker compose -f docker-compose.yml -f compose.custom.yaml config
+# docker compose -f docker-compose.yml -f compose.custom.yaml up -d --no-deps vdr-server
+# This file changes only the image; existing settings/mounts/ports stay in effect.
+services:
+  vdr-server:
+    image: vdr-server-custom:2026-11-13
+    pull_policy: never

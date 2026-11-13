@@ -1,0 +1,41 @@
+#!/command/with-contenv bash
+set -euo pipefail
+# Only locally installed packages are considered. No repository access.
+read -ra requested <<< "${PLUGINS:-dvbapi svdrposd epgsearch live streamdev-server vnsiserver}"
+declare -A wanted=()
+for plugin in "${requested[@]}"; do
+    plugin=${plugin,,}
+    [[ "$plugin" =~ ^[a-z0-9][a-z0-9_-]*$ ]] || { echo "Invalid plugin: $plugin" >&2; exit 1; }
+    wanted["$plugin"]=1
+done
+if [[ "${DISABLE_WEBINTERFACE:-false}" == true ]]; then
+    unset 'wanted[live]'
+else
+    wanted[live]=1
+fi
+# Validate all requested plugins before changing any enabled state.
+for plugin in "${!wanted[@]}"; do
+    pacman -Q "vdr-$plugin" >/dev/null || {
+        echo "Plugin $plugin is missing from this image. Rebuild the image to add it." >&2
+        exit 1
+    }
+    [[ -f "/etc/vdr/conf.avail/50-$plugin.conf" ]] || {
+        # Some upstream plugins use another ordering prefix.
+        compgen -G "/etc/vdr/conf.avail/*-$plugin.conf" >/dev/null || {
+            echo "Plugin configuration missing: $plugin" >&2; exit 1;
+        }
+    }
+done
+enabled=$(vdrctl list --enabled)
+while IFS= read -r plugin; do
+    [[ -n "$plugin" ]] || continue
+    if [[ -z "${wanted[$plugin]+present}" ]]; then
+        vdrctl disable "$plugin"
+    fi
+done <<< "$enabled"
+for plugin in "${!wanted[@]}"; do
+    if ! grep -Fxq "$plugin" <<< "$enabled"; then
+        vdrctl enable "$plugin"
+    fi
+done
+printf 'Custom image: plugins ready; no runtime package installation.\n'

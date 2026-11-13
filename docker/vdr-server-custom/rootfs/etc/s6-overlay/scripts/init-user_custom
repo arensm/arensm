@@ -1,0 +1,12 @@
+#!/command/with-contenv bash
+set -euo pipefail
+puid=${PUID:-1000}
+pgid=${PGID:-1000}
+[[ "$puid" =~ ^[0-9]+$ && "$pgid" =~ ^[0-9]+$ ]] || { echo "Invalid PUID/PGID" >&2; exit 1; }
+# No global find/chown/chgrp: mounted recordings are never traversed here.
+if [[ "$(getent group vdr | cut -d: -f3)" != "$pgid" ]]; then
+    groupmod --non-unique --gid "$pgid" vdr
+fi
+if [[ "$(id -u vdr)" != "$puid" ]]; then
+    usermod --non-unique --uid "$puid" vdr
+fi
