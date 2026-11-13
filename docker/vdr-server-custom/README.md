@@ -48,7 +48,7 @@ The Dockerfile pins the base image to:
 ghcr.io/lapicidae/vdr-server@sha256:65da77dcdbd5ba4bfa8500dac6299f17b335ce14987ba5fbd58091921a6613d1
 ```
 
-VDR itself is not rebuilt. The build compiles svdrposd against the base image's VDR API, installs its package, verifies the six required plugin packages, and copies in the startup changes. Installed versions are recorded in `/etc/vdr-custom-packages.txt`.
+VDR itself is not rebuilt. The build compiles svdrposd against the base image's VDR API, installs its package, verifies the five required plugin packages, and copies in the startup changes. Installed versions are recorded in `/etc/vdr-custom-packages.txt`.
 
 Inspect that manifest without starting VDR:
 
@@ -196,7 +196,7 @@ On the original deployment host, the pre-change backup was named `docker-compose
 
 The initial x86_64 build and deployment on November 13, 2026 verified:
 
-- All six required plugins were installed and recognized by VDR.
+- All five required plugins were installed and recognized by VDR.
 - svdrposd had no missing shared-library dependencies.
 - Offline initialization reached the VDR invocation in approximately 5–6 seconds with a fresh test configuration.
 - Initialization worked with a read-only test recording mount; the test file's ownership and permissions remained unchanged.
@@ -216,7 +216,6 @@ These timings measure startup to the VDR invocation, not guaranteed time to a pl
 | `rootfs/` | Replacement UID/GID and plugin initialization scripts |
 | `compose.override.yaml` | Optional image override for an existing service |
 | `LICENSE.upstream` | Included upstream license text |
-| `README.txt`, `TESTERGEBNIS.txt` | Original German deployment notes and test records |
 
 ## Upstream and licensing
 

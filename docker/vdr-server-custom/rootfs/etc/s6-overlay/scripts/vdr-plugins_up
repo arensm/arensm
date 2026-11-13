@@ -1,7 +1,7 @@
 #!/command/with-contenv bash
 set -euo pipefail
 # Only locally installed packages are considered. No repository access.
-read -ra requested <<< "${PLUGINS:-dvbapi svdrposd epgsearch live streamdev-server vnsiserver}"
+read -ra requested <<< "${PLUGINS:-svdrposd epgsearch live streamdev-server vnsiserver}"
 declare -A wanted=()
 for plugin in "${requested[@]}"; do
     plugin=${plugin,,}
